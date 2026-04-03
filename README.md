@@ -22,7 +22,10 @@ inside all APIs are case-sensitive for filter variables `type` and `category`.
       and date range
     - Deleted records are soft deleted using isDeleted
 
-- [ ] Dashboard Summary APIs
+- [x] Dashboard Summary APIs
+    - Summary endpoint returns total income, total expense, and net balance
+    - Category-wise totals are returned through categoryBreakdown
+    - Recent activity is returned through recentTransactions
 
 
 - [x] Access Control Logic
@@ -60,10 +63,11 @@ inside all APIs are case-sensitive for filter variables `type` and `category`.
 |--------|----------|--------|-------------|
 | POST | `/auth/register` | Any | Register a new user |
 | POST | `/auth/login` | Any | Login and get JWT token |
-| GET | `/records` | Analyst/Admin | View records with optional filters and pagination |
+| GET | `/records` | Authenticated user | View records with optional filters and pagination |
 | POST | `/records` | Admin | Create a new record |
 | PATCH | `/records/:id` | Admin | Update an existing record |
 | DELETE | `/records/:id` | Admin | Soft delete a record |
+| GET | `/dashboard/summary` | Anyone | View dashboard summary data |
 
 ## Setup
 
