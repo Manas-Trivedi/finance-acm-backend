@@ -1,5 +1,8 @@
 # Finance Data Processing and Access Control Backend
 
+Note: This backend is modeled towards consistency over leniency. Type checks
+inside all APIs are case-sensitive for filter variables `type` and `category`.
+
 ## Core Requirements
 
 - [x] User and Role Management
