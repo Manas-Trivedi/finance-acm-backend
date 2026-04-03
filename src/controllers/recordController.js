@@ -32,7 +32,7 @@ export const getRecords = async (req, res) => {
         where.category = category;
     }
 
-    if(minAmount || maxAmount) {
+    if(minAmount !== undefined || maxAmount !== undefined) {
         where.amount = {}
         if(minAmount) {
             if(isNaN(Number(minAmount)))

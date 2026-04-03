@@ -65,3 +65,10 @@
     - Update an existing record
 - `DELETE /records/:id`
     - Soft delete a record
+
+## Setup
+
+npm install
+npx prisma migrate dev
+node prisma/seed.js
+npm run dev

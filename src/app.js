@@ -1,7 +1,6 @@
 import express from "express";
 import authRoutes from "./routes/authRoutes.js"
 import recordRoutes from "./routes/recordRoutes.js"
-import { record } from "zod";
 
 const app = express();
 
