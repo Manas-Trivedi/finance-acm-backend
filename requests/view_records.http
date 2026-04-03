@@ -2,3 +2,14 @@
 
 GET http://localhost:3000/records
 Authorization: Bearer {{token}}
+
+## Filters
+##
+## ?type= [INCOME/EXPENSE]
+## ?category= [string value (case-sensitive)]
+## ?minAmount= [Number]
+## ?maxAmount= [Number]
+## ?startDate= [ISO Date]
+## ?endDate= [ISO Date]
+## ?page= [Number]
+## ?limit= [Number (max = 50)]
