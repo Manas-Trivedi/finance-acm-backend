@@ -104,7 +104,7 @@ export const createRecord = async (req, res) => {
         return res.status(400).json({ message: "Invalid type" });
     }
 
-    if(!category || category.trip() === "") {
+    if(!category || category.trim() === "") {
         return res.status(400).json({ message: "Category is required" });
     }
 

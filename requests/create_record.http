@@ -5,9 +5,9 @@ Authorization: Bearer {{token}}
 content-type: application/json
 
 {
-    "amount": ,
-    "type": ,
-    "category": ,
-    "date": ,
-    "notes": 
+    "amount": 100,
+    "type": "INCOME",
+    "category": "food",
+    "date": "2022-09-27 18:00:00.000",
+    "notes": "none"
 }
