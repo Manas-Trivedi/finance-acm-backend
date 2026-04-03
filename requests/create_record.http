@@ -1,0 +1,13 @@
+@token = paste_token_here
+
+POST http://localhost:3000/records
+Authorization: Bearer {{token}}
+content-type: application/json
+
+{
+    "amount": ,
+    "type": ,
+    "category": ,
+    "date": ,
+    "notes": 
+}
