@@ -1,5 +1,5 @@
 ### Get Records
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJWSUVXRVIiLCJpYXQiOjE3NzUxMzE0MDQsImV4cCI6MTc3NTIxNzgwNH0.TWiNU1sQQ0V-SopyyOvjWMe-pFNqwmTgrkT0By-621s
+@token = paste_token_here
 
 GET http://localhost:3000/records
 Authorization: Bearer {{token}}
