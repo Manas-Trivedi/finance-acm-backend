@@ -53,18 +53,14 @@
 
 ## API Overview
 
-- `POST /auth/register`
-    - Register a new user
-- `POST /auth/login`
-    - Login and get JWT token
-- `GET /records`
-    - View records with optional filters and pagination
-- `POST /records`
-    - Create a new record
-- `PATCH /records/:id`
-    - Update an existing record
-- `DELETE /records/:id`
-    - Soft delete a record
+| Method | Endpoint | Access | Description |
+|--------|----------|--------|-------------|
+| POST | `/auth/register` | Any | Register a new user |
+| POST | `/auth/login` | Any | Login and get JWT token |
+| GET | `/records` | Any | View records with optional filters and pagination |
+| POST | `/records` | Admin | Create a new record |
+| PATCH | `/records/:id` | Admin | Update an existing record |
+| DELETE | `/records/:id` | Admin | Soft delete a record |
 
 ## Setup
 

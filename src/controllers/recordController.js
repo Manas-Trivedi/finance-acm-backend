@@ -34,12 +34,12 @@ export const getRecords = async (req, res) => {
 
     if(minAmount !== undefined || maxAmount !== undefined) {
         where.amount = {}
-        if(minAmount) {
+        if(minAmount !== undefined) {
             if(isNaN(Number(minAmount)))
                 return res.status(400).json({ message: "Invalid minAmount" });
             where.amount.gte = Number(minAmount);
         }
-        if(maxAmount) {
+        if(maxAmount !== undefined) {
             if(isNaN(Number(maxAmount)))
                 return res.status(400).json({ message: "Invalid maxAmount" });
             where.amount.lte = Number(maxAmount);
