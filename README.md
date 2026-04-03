@@ -60,7 +60,7 @@ inside all APIs are case-sensitive for filter variables `type` and `category`.
 |--------|----------|--------|-------------|
 | POST | `/auth/register` | Any | Register a new user |
 | POST | `/auth/login` | Any | Login and get JWT token |
-| GET | `/records` | Any | View records with optional filters and pagination |
+| GET | `/records` | Analyst/Admin | View records with optional filters and pagination |
 | POST | `/records` | Admin | Create a new record |
 | PATCH | `/records/:id` | Admin | Update an existing record |
 | DELETE | `/records/:id` | Admin | Soft delete a record |

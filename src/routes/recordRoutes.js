@@ -4,7 +4,7 @@ import { authenticate, authorizeRoles } from "../middlewares/authMiddleware.js";
 
 const router = express.Router();
 
-router.get("/", authenticate, getRecords);
+router.get("/", authenticate, authorizeRoles("ADMIN", "ANALYST"), getRecords);
 router.post("/", authenticate, authorizeRoles("ADMIN"), createRecord);
 router.patch("/:id", authenticate, authorizeRoles("ADMIN"), updateRecord);
 router.delete("/:id", authenticate, authorizeRoles("ADMIN"), deleteRecord);
