@@ -108,7 +108,6 @@ export const createRecord = async (req, res) => {
         return res.status(400).json({ message: "Category is required" });
     }
 
-    // 5. validate date
     const day = new Date(date);
     if(isNaN(day.getTime())) {
         return res.status(400).json({ message: "Invalid date" });
@@ -128,6 +127,118 @@ export const createRecord = async (req, res) => {
     res.status(201).json({
       message: "Record created successfully",
       record
+    });
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+export const updateRecord = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { amount, type, category, date, notes } = req.body;
+
+    const recordId = Number(id);
+
+    if (isNaN(recordId)) {
+        return res.status(400).json({ message: "Invalid record id" });
+    }
+
+    const existingRecord = await prisma.financialRecord.findUnique({
+      where: { id: recordId }
+    });
+    if (!existingRecord || existingRecord.isDeleted) {
+        return res.status(404).json({ message: "Record not found" });
+    }
+
+    const updateData = {};
+
+    if(amount !== undefined) {
+        if(isNaN(Number(amount))) {
+            return res.status(400).json({ message: "Invalid amount" });
+        }
+
+        if (Number(amount) <= 0) {
+            return res.status(400).json({ message: "Amount must be greater than 0" });
+        }
+
+        updateData.amount = Number(amount);
+    }
+
+    if(type !== undefined) {
+        if(!["INCOME", "EXPENSE"].includes(type)) {
+            return res.status(400).json({ message: "Invalid type" });
+        }
+
+        updateData.type = type;
+    }
+
+    if(category !== undefined) {
+        if(category.trim() === "") {
+            return res.status(400).json({ message: "Category is required" });
+        }
+
+        updateData.category = category.trim();
+    }
+
+    if (date !== undefined) {
+      const day = new Date(date);
+      if (isNaN(day.getTime())) {
+        return res.status(400).json({ message: "Invalid date" });
+      }
+
+      updateData.date = day;
+    }
+
+    if(notes !== undefined) updateData.notes = notes;
+
+    if (Object.keys(updateData).length === 0) {
+        return res.status(400).json({ message: "No fields to update" });
+    }
+
+    const updatedRecord = await prisma.financialRecord.update({
+      where: { id: recordId },
+      data: updateData
+    });
+
+    res.status(200).json({
+      message: "Record updated successfully",
+      updatedRecord
+    });
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+
+export const deleteRecord = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const recordId = Number(id);
+    if (isNaN(recordId)) {
+      return res.status(400).json({ message: "Invalid record id" });
+    }
+
+    const existingRecord = await prisma.financialRecord.findUnique({
+      where: { id: recordId }
+    });
+    if (!existingRecord || existingRecord.isDeleted) {
+      return res.status(404).json({ message: "Record not found" });
+    }
+
+    const deletedRecord = await prisma.financialRecord.update({
+      where: { id: recordId },
+      data: { isDeleted: true }
+    });
+
+    res.status(200).json({
+      message: "Record deleted successfully",
+      deletedRecord
     });
 
   } catch (err) {
