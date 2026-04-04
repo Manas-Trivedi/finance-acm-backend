@@ -67,12 +67,13 @@ inside all APIs are case-sensitive for filter variables `type` and `category`.
 | POST | `/records` | Admin | Create a new record |
 | PATCH | `/records/:id` | Admin | Update an existing record |
 | DELETE | `/records/:id` | Admin | Soft delete a record |
-| GET | `/dashboard/summary` | Anyone | View dashboard summary data |
+| GET | `/dashboard/summary` | Authenticated | View dashboard summary data |
 
 ## Setup
 
 npm install
 npx prisma migrate dev
 node prisma/seed.js
+[register more users either custom or using requests/register.http]
 node prisma/seedRecords.js
 npm run dev
