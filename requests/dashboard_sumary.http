@@ -1,0 +1,7 @@
+@token = paste_token_here
+
+GET http://localhost:3000/dashboard/summary
+Authorization: Bearer {{token}}
+
+### Filter
+# ?userId= [Admin only]
