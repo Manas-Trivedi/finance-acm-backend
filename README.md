@@ -26,6 +26,8 @@ inside all APIs are case-sensitive for filter variables `type` and `category`.
     - Summary endpoint returns total income, total expense, and net balance
     - Category-wise totals are returned through categoryBreakdown
     - Recent activity is returned through recentTransactions
+    - Authenticated users get their own summary by default
+    - ADMIN can request another user's summary with `?userId=`
 
 
 - [x] Access Control Logic
@@ -33,6 +35,8 @@ inside all APIs are case-sensitive for filter variables `type` and `category`.
     - Role based access control provided through authorizeRoles middleware
     - Record creation, update, and delete routes are restricted to ADMIN
     - Record viewing requires a valid authenticated user
+    - Dashboard summary respects role scope (self for user roles, optional
+      `userId` override for ADMIN)
 
 - [x] Validation and Error Handling
     - Required field checks added for auth and record routes
@@ -67,7 +71,7 @@ inside all APIs are case-sensitive for filter variables `type` and `category`.
 | POST | `/records` | Admin | Create a new record |
 | PATCH | `/records/:id` | Admin | Update an existing record |
 | DELETE | `/records/:id` | Admin | Soft delete a record |
-| GET | `/dashboard/summary` | Authenticated | View dashboard summary data |
+| GET | `/dashboard/summary` | Authenticated | View dashboard summary data (`?userId=` is ADMIN only) |
 
 ## Setup
 
