@@ -1,7 +1,12 @@
 # Finance Data Processing and Access Control Backend
 
-Note: This backend is modeled towards consistency over leniency. Type checks
-inside all APIs are case-sensitive for filter variables `type` and `category`.
+## Design Decisions
+
+- This backend is modeled towards consistency over leniency. Type checks inside
+all APIs are case-sensitive for filter variables `type` and `category`.
+
+- Viewers can only access dashboard APIs not record APIs this is for the purpose
+of demonstrating RBAC cleanly changing this access is trivial.
 
 ## Core Requirements
 
