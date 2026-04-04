@@ -74,4 +74,5 @@ inside all APIs are case-sensitive for filter variables `type` and `category`.
 npm install
 npx prisma migrate dev
 node prisma/seed.js
+node prisma/seedRecords.js
 npm run dev
