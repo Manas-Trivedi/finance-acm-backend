@@ -5,7 +5,13 @@ export const getDashboardSummary = async (req, res) => {
     const requestedUserId = req.query.userId;
     let targetUserId;
     if (requestedUserId && req.user.role === "ADMIN") {
-      targetUserId = Number(requestedUserId);
+      if(requestedUserId !== "all" && !isNaN(Number(requestedUserId))) {
+        where.userId = Number(requestedUserId);
+      }
+      else if(requestedUserId !== "all") {
+        return res.status(400).json({ message: "Requested User ID is invalid" });
+      }
+      // else we take all records (admin access only)
     } else {
       targetUserId = req.user.userId;
     }

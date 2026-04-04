@@ -1,12 +1,12 @@
 # Finance Data Processing and Access Control Backend
 
-## Design Decisions
+## Assumptions and Design Decisions
 
-- This backend is modeled towards consistency over leniency. Type checks inside
-all APIs are case-sensitive for filter variables `type` and `category`.
-
-- Viewers can only access dashboard APIs not record APIs this is for the purpose
-of demonstrating RBAC cleanly changing this access is trivial.
+- Users can self-register as VIEWER or ANALYST roles.
+- VIEWER role is restricted to dashboard access only (no record access) to clearly demonstrate RBAC.
+- Financial data is user-scoped by default.
+- ADMIN users can override scope using `?userId=` or `?userId=all`.
+- Categories are stored as case-sensitive free-form strings.
 
 ## Core Requirements
 
@@ -77,11 +77,19 @@ of demonstrating RBAC cleanly changing this access is trivial.
 |--------|----------|--------|-------------|
 | POST | `/auth/register` | Any | Register a new user |
 | POST | `/auth/login` | Any | Login and get JWT token |
-| GET | `/records` | Admin, Analyst | View records with filters and pagination (`?userId=` ADMIN only, `all` allowed) |
+| GET | `/records` | Admin, Analyst | View records with filters and pagination (`?userId=` ADMIN only) |
 | POST | `/records` | Admin | Create a new record |
 | PATCH | `/records/:id` | Admin | Update an existing record |
 | DELETE | `/records/:id` | Admin | Soft delete a record |
 | GET | `/dashboard/summary` | Authenticated | View dashboard summary data (`?userId=` is ADMIN only) |
+
+## Environment Variables
+
+Create a `.env` file in the root directory with:
+
+DATABASE_URL="file:./dev.db"
+JWT_SECRET="your_secret_key"
+PORT=3000
 
 ## Setup
 

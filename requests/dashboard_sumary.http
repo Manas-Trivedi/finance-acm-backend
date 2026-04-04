@@ -4,4 +4,4 @@ GET http://localhost:3000/dashboard/summary
 Authorization: Bearer {{token}}
 
 ### Filter
-# ?userId= [Admin only]
+# ?userId= [`userId` or `all`] [Admin only]
