@@ -25,6 +25,9 @@ of demonstrating RBAC cleanly changing this access is trivial.
     - Record Types: INCOME, EXPENSE
     - Filtering available on record listing using type, category, amount range,
       and date range
+    - Record listing supports role-aware user filtering using `?userId=`
+      (ADMIN only, `all` supported for global access)
+    - Non-admin record listing is always scoped to the authenticated user
     - Deleted records are soft deleted using isDeleted
 
 - [x] Dashboard Summary APIs
@@ -39,7 +42,9 @@ of demonstrating RBAC cleanly changing this access is trivial.
     - JWT based authentication provided through authenticate middleware
     - Role based access control provided through authorizeRoles middleware
     - Record creation, update, and delete routes are restricted to ADMIN
-    - Record viewing requires a valid authenticated user
+    - Record viewing is restricted to ADMIN and ANALYST
+    - Record listing scope is role-based (self for ANALYST, optional `userId`
+      or `all` for ADMIN)
     - Dashboard summary respects role scope (self for user roles, optional
       `userId` override for ADMIN)
 
@@ -72,7 +77,7 @@ of demonstrating RBAC cleanly changing this access is trivial.
 |--------|----------|--------|-------------|
 | POST | `/auth/register` | Any | Register a new user |
 | POST | `/auth/login` | Any | Login and get JWT token |
-| GET | `/records` | Authenticated user | View records with optional filters and pagination |
+| GET | `/records` | Admin, Analyst | View records with filters and pagination (`?userId=` ADMIN only, `all` allowed) |
 | POST | `/records` | Admin | Create a new record |
 | PATCH | `/records/:id` | Admin | Update an existing record |
 | DELETE | `/records/:id` | Admin | Soft delete a record |

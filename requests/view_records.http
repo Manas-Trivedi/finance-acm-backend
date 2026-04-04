@@ -5,6 +5,7 @@ Authorization: Bearer {{token}}
 
 ## Filters
 ##
+## ?userId= [ADMIN ACCESS ONLY] [use `all` for accessing global records]
 ## ?type= [INCOME/EXPENSE]
 ## ?category= [string value (case-sensitive)]
 ## ?minAmount= [Number]

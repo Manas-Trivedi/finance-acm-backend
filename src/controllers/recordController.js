@@ -3,6 +3,7 @@ import prisma from "../utils/prisma.js";
 export const getRecords = async (req, res) => {
   try {
     const {
+      userId,
       type,
       category,
       minAmount,
@@ -13,12 +14,21 @@ export const getRecords = async (req, res) => {
       limit = 10
     } = req.query;
 
+
     const pageNum = Math.max(1, Number(page));
     const limitNum = Math.min(50, Math.max(1, Number(limit)));
 
     const where = {
       isDeleted: false
     };
+
+    if (userId && req.user.role === "ADMIN") {
+      if(userId !== "all" && !isNaN(Number(userId))) where.userId = Number(userId);
+      else if(userId !== "all") return res.status(400).json({ message: "Requested User ID is invalid" });
+      // else we take all records (admin access only)
+    } else {
+      where.userId = req.user.userId;
+    }
 
     if (type) {
         if(["INCOME", "EXPENSE"].includes(type)) {
