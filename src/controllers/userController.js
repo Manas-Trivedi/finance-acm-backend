@@ -27,6 +27,12 @@ export const updateUserRole = async (req, res) => {
         return res.status(400).json({ message: "Invalid role" });
     }
 
+    const existing = await prisma.user.findUnique({ where: { id: userId } });
+
+    if (!existing) {
+        return res.status(404).json({ message: "User not found" });
+    }
+
     const updated = await prisma.user.update({
         where: { id: userId },
         data: { role }
@@ -46,6 +52,13 @@ export const updateUserStatus = async (req, res) => {
         if (!["ACTIVE", "INACTIVE"].includes(status)) {
           return res.status(400).json({ message: "Invalid status" });
         }
+
+        const existing = await prisma.user.findUnique({ where: { id: userId } });
+
+        if (!existing) {
+          return res.status(404).json({ message: "User not found" });
+        }
+
         const updated = await prisma.user.update({
           where: { id: userId },
           data: { status }

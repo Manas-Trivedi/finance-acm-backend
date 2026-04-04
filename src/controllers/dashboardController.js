@@ -16,16 +16,20 @@ export const getDashboardSummary = async (req, res) => {
       targetUserId = req.user.userId;
     }
 
+    const whereClause = {
+      isDeleted: false,
+      ...(targetUserId && {userId: targetUserId}) // ignore if first value is false
+    };                                            // else return second value
+
     const totalTransactions = await prisma.financialRecord.count({
-      where: { userId: targetUserId, isDeleted: false }
+      where: { ...whereClause }
     });
 
     const incomeAggregate = await prisma.financialRecord.aggregate({
         _sum: { amount: true },
         where: {
             type: "INCOME",
-            userId: targetUserId,
-            isDeleted: false
+            ...whereClause
         }
     });
 
@@ -35,8 +39,7 @@ export const getDashboardSummary = async (req, res) => {
         _sum: { amount: true },
         where: {
             type: "EXPENSE",
-            userId: targetUserId,
-            isDeleted: false
+            ...whereClause
         }
     });
 
@@ -44,7 +47,7 @@ export const getDashboardSummary = async (req, res) => {
 
     const categoryData = await prisma.financialRecord.groupBy({
       by: ["category", "type"],
-      where: { userId: targetUserId, isDeleted: false },
+      where: { ...whereClause },
       _sum: { amount: true }
     });
 
@@ -66,7 +69,7 @@ export const getDashboardSummary = async (req, res) => {
     });
 
     const recentTransactions = await prisma.financialRecord.findMany({
-      where: { userId: targetUserId, isDeleted: false },
+      where: { ...whereClause },
       orderBy: { date: "desc" },
       take: 5
     });
