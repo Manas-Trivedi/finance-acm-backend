@@ -8,5 +8,6 @@ content-type: application/json
 
 # {
 #     "email": "analyst@gmail.com",
-#     "password": "analyst123"
+#     "password": "analyst123",
+#     "role": "ANALYST"
 # }
