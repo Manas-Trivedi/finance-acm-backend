@@ -12,7 +12,9 @@
 
 - [x] User and Role Management
     - User creation and login handled using authController and authRoutes
+    - User listing and user updates handled using userController and userRoutes
     - Role assignment available through account creation for VIEWER and ANALYST
+    - Admin can update user role and status using dedicated user APIs
     - User Roles: VIEWER, ANALYST, ADMIN
     - User Status: Active or Inactive
     - Action Restriction based on role: provided through authorizeRoles in
@@ -77,6 +79,9 @@
 |--------|----------|--------|-------------|
 | POST | `/auth/register` | Any | Register a new user |
 | POST | `/auth/login` | Any | Login and get JWT token |
+| GET | `/users` | Admin | List all users |
+| PATCH | `/users/:id/role` | Admin | Update a user's role |
+| PATCH | `/users/:id/status` | Admin | Update a user's status |
 | GET | `/records` | Admin, Analyst | View records with filters and pagination (`?userId=` ADMIN only) |
 | POST | `/records` | Admin | Create a new record |
 | PATCH | `/records/:id` | Admin | Update an existing record |
