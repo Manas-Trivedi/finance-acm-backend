@@ -1,0 +1,10 @@
+@token = paste_token_here
+
+
+PATCH http://localhost:3000/users/2/status
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "status": "INACTIVE"
+}

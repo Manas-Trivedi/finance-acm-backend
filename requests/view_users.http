@@ -1,0 +1,4 @@
+@token = paste_token_here
+
+GET http://localhost:3000/users
+Authorization: Bearer {{token}}
