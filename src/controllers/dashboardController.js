@@ -6,7 +6,7 @@ export const getDashboardSummary = async (req, res) => {
     let targetUserId;
     if (requestedUserId && req.user.role === "ADMIN") {
       if(requestedUserId !== "all" && !isNaN(Number(requestedUserId))) {
-        where.userId = Number(requestedUserId);
+        targetUserId = Number(requestedUserId);
       }
       else if(requestedUserId !== "all") {
         return res.status(400).json({ message: "Requested User ID is invalid" });
